@@ -7,7 +7,7 @@ public class MovieBuilder {
 	private Price price;
 	
 	public MovieBuilder() {
-		title = "movieName";
+		this.title = "movieName";
 	}
 	
 	public MovieBuilder title(String title) {

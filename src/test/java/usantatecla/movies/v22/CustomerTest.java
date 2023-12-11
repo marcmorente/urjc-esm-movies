@@ -8,13 +8,10 @@ public class CustomerTest {
 
     @Test
     public void withoutRentalsTest() {
-        String customerName = "customerName";
-        Customer customer = new CustomerBuilder()
-                .name(customerName)
-                .build();
+        Customer customer = new CustomerBuilder().build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
+                .customerName(customer.getName())
                 .totalAmount(0)
                 .frequentRenterPoints(0)
                 .build();
@@ -24,24 +21,20 @@ public class CustomerTest {
 
     @Test
     public void regularRental1DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .regular()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(1)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 2)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 2)
                 .totalAmount(2)
                 .frequentRenterPoints(1)
                 .build();
@@ -51,24 +44,20 @@ public class CustomerTest {
 
     @Test
     public void regularRental2DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .regular()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(2)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 2)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 2)
                 .totalAmount(2)
                 .frequentRenterPoints(1)
                 .build();
@@ -78,24 +67,20 @@ public class CustomerTest {
 
     @Test
     public void regularRental3DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .regular()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(3)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 3.5)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 3.5)
                 .totalAmount(3.5)
                 .frequentRenterPoints(1)
                 .build();
@@ -105,24 +90,20 @@ public class CustomerTest {
 
     @Test
     public void newReleaseRental1DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .newRelease()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(1)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 3)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 3)
                 .totalAmount(3)
                 .frequentRenterPoints(1)
                 .build();
@@ -132,24 +113,20 @@ public class CustomerTest {
 
     @Test
     public void newReleaseRental2DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .newRelease()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(2)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 3)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 3)
                 .totalAmount(3)
                 .frequentRenterPoints(2)
                 .build();
@@ -159,24 +136,20 @@ public class CustomerTest {
 
     @Test
     public void newReleaseRental3DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .newRelease()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(3)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 3)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 3)
                 .totalAmount(3)
                 .frequentRenterPoints(2)
                 .build();
@@ -186,25 +159,20 @@ public class CustomerTest {
 
     @Test
     public void childrenRental1DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .children()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(1)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
-
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 1.5)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 1.5)
                 .totalAmount(1.5)
                 .frequentRenterPoints(1)
                 .build();
@@ -214,24 +182,20 @@ public class CustomerTest {
 
     @Test
     public void childrenRental3DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .children()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(3)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 1.5)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 1.5)
                 .totalAmount(1.5)
                 .frequentRenterPoints(1)
                 .build();
@@ -241,24 +205,20 @@ public class CustomerTest {
 
     @Test
     public void childrenRental4DayTest() {
-        String movieName = "movieName";
         Movie movie = new MovieBuilder()
-                .title(movieName)
                 .children()
                 .build();
         Rental rental = new RentalBuilder()
                 .movie(movie)
                 .daysRented(4)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(rental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
-                .movie(movieName, 6)
+                .customerName(customer.getName())
+                .movie(movie.getTitle(), 6)
                 .totalAmount(6)
                 .frequentRenterPoints(1)
                 .build();
@@ -286,34 +246,30 @@ public class CustomerTest {
                 .movie(newReleaseMovie)
                 .daysRented(10)
                 .build();
-        String childrensMovieName = "childrensMovieName";
+        String childrenMovieName = "childrenMovieName";
         Movie childrensMovie = new MovieBuilder()
-                .title(childrensMovieName)
+                .title(childrenMovieName)
                 .children()
                 .build();
         Rental childrensRental = new RentalBuilder()
                 .movie(childrensMovie)
                 .daysRented(10)
                 .build();
-        String customerName = "customerName";
         Customer customer = new CustomerBuilder()
-                .name(customerName)
                 .rental(regularRental)
                 .rental(newReleaseRental)
                 .rental(childrensRental)
                 .build();
         String statement = customer.statement();
         String result = new StatementBuilder()
-                .customerName(customerName)
+                .customerName(customer.getName())
                 .movie(regularMovieName, 14)
                 .movie(newReleaseMovieName, 3)
-                .movie(childrensMovieName, 15)
+                .movie(childrenMovieName, 15)
                 .totalAmount(32)
                 .frequentRenterPoints(4)
                 .build();
 
         assertEquals(result, statement);
     }
-
-
 }

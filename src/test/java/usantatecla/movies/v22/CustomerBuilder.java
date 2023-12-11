@@ -9,7 +9,8 @@ public class CustomerBuilder {
     private List<Rental> rentals;
 
     public CustomerBuilder() {
-        rentals = new ArrayList<Rental>();
+        this.rentals = new ArrayList<Rental>();
+        this.name = "customerName";
     }
 
     public CustomerBuilder name(String name) {
@@ -18,13 +19,13 @@ public class CustomerBuilder {
     }
 
     public CustomerBuilder rental(Rental rental) {
-        rentals.add(rental);
+        this.rentals.add(rental);
         return this;
     }
 
     public Customer build() {
-        Customer customer = new Customer(name);
-        for (Rental rental : rentals) {
+        Customer customer = new Customer(this.name);
+        for (Rental rental : this.rentals) {
             customer.addRental(rental);
         }
         return customer;
