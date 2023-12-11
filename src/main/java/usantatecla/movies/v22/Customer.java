@@ -37,16 +37,16 @@ public class Customer {
 
     private double getTotalCharge() {
 		double result = 0;
-        for (Rental each : this.rentals) {
-            result += each.getCharge();
+        for (Rental rental : this.rentals) {
+            result += rental.getCharge();
         }
 		return result;
 	}
 	
 	private int getTotalFrequentRenterPoints() {
 		int result = 0;
-        for (Rental each : this.rentals) {
-            result += each.getFrequentRenterPoints();
+        for (Rental rental : this.rentals) {
+            result += rental.getFrequentRenterPoints();
         }
 		return result;
 	}
