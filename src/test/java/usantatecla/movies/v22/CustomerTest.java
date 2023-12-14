@@ -9,14 +9,17 @@ public class CustomerTest {
     @Test
     public void withoutRentalsTest() {
         Customer customer = new CustomerBuilder().build();
-        String statement = customer.statement();
-        String result = new StatementBuilder()
+        String result = buildStatementWithoutRentals(customer);
+
+        assertEquals(result, customer.statement());
+    }
+
+    private String buildStatementWithoutRentals(Customer customer) {
+        return new StatementBuilder()
                 .customerName(customer.getName())
                 .totalAmount(0)
                 .frequentRenterPoints(0)
                 .build();
-
-        assertEquals(result, statement);
     }
 
     @Test
