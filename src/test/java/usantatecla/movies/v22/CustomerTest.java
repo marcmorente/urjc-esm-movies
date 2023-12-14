@@ -1,25 +1,25 @@
 package usantatecla.movies.v22;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class CustomerTest {
 
+    private String customerName;
+
+    @Before
+    public void init() {
+        this.customerName = "customerName";
+    }
+
     @Test
     public void withoutRentalsTest() {
         Customer customer = new CustomerBuilder().build();
-        String result = buildStatementWithoutRentals(customer);
+        String result = this.buildStatementWithoutRentals(customer);
 
         assertEquals(result, customer.statement());
-    }
-
-    private String buildStatementWithoutRentals(Customer customer) {
-        return new StatementBuilder()
-                .customerName(customer.getName())
-                .totalAmount(0)
-                .frequentRenterPoints(0)
-                .build();
     }
 
     @Test
@@ -274,5 +274,13 @@ public class CustomerTest {
                 .build();
 
         assertEquals(result, statement);
+    }
+
+    private String buildStatementWithoutRentals(Customer customer) {
+        return new StatementBuilder()
+                .customerName(this.customerName)
+                .totalAmount(0)
+                .frequentRenterPoints(0)
+                .build();
     }
 }
