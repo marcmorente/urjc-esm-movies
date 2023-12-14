@@ -126,32 +126,14 @@ public class CustomerTest {
     @Test
     public void rentalTest() {
         String regularMovieName = "regularMovieName";
-        Movie regularMovie = new MovieBuilder()
-                .title(regularMovieName)
-                .regular()
-                .build();
-        Rental regularRental = new RentalBuilder()
-                .movie(regularMovie)
-                .daysRented(10)
-                .build();
+        Movie regularMovie = this.buildRegularMovie(regularMovieName);
+        Rental regularRental = this.buildRental(regularMovie, daysRented(10));
         String newReleaseMovieName = "newReleaseMovieName";
-        Movie newReleaseMovie = new MovieBuilder()
-                .title(newReleaseMovieName)
-                .newRelease()
-                .build();
-        Rental newReleaseRental = new RentalBuilder()
-                .movie(newReleaseMovie)
-                .daysRented(10)
-                .build();
+        Movie newReleaseMovie = this.buildNewReleaseMovie(newReleaseMovieName);
+        Rental newReleaseRental = this.buildRental(newReleaseMovie, daysRented(10));
         String childrenMovieName = "childrenMovieName";
-        Movie childrensMovie = new MovieBuilder()
-                .title(childrenMovieName)
-                .children()
-                .build();
-        Rental childrensRental = new RentalBuilder()
-                .movie(childrensMovie)
-                .daysRented(10)
-                .build();
+        Movie childrensMovie = this.buildChildrenMovie(childrenMovieName);
+        Rental childrensRental = this.buildRental(childrensMovie, daysRented(10));
         Customer customer = new CustomerBuilder()
                 .rental(regularRental)
                 .rental(newReleaseRental)
@@ -160,9 +142,9 @@ public class CustomerTest {
         String statement = customer.statement();
         String result = new StatementBuilder()
                 .customerName(customer.getName())
-                .movie(regularMovieName, 14)
-                .movie(newReleaseMovieName, 3)
-                .movie(childrenMovieName, 15)
+                .movie(regularMovieName, amount(14))
+                .movie(newReleaseMovieName, amount(3))
+                .movie(childrenMovieName, amount(15))
                 .totalAmount(32)
                 .frequentRenterPoints(4)
                 .build();
@@ -180,6 +162,13 @@ public class CustomerTest {
 
     private Movie buildRegularMovie() {
         return new MovieBuilder()
+                .regular()
+                .build();
+    }
+
+    private Movie buildRegularMovie(String title) {
+        return new MovieBuilder()
+                .title(title)
                 .regular()
                 .build();
     }
@@ -221,6 +210,26 @@ public class CustomerTest {
     private Movie buildNewReleaseMovie() {
         return new MovieBuilder()
                 .newRelease()
+                .build();
+    }
+
+    private Movie buildNewReleaseMovie(String title) {
+        return new MovieBuilder()
+                .title(title)
+                .newRelease()
+                .build();
+    }
+
+    private Movie buildChildrenMovie() {
+        return new MovieBuilder()
+                .children()
+                .build();
+    }
+
+    private Movie buildChildrenMovie(String title) {
+        return new MovieBuilder()
+                .title(title)
+                .children()
                 .build();
     }
 }
