@@ -8,10 +8,12 @@ import static org.junit.Assert.assertEquals;
 public class CustomerTest {
 
     private String customerName;
+    private String movieName;
 
     @Before
     public void init() {
         this.customerName = "customerName";
+        this.movieName = "movieName";
     }
 
     @Test
@@ -24,23 +26,11 @@ public class CustomerTest {
 
     @Test
     public void regularRental1DayTest() {
-        Movie movie = new MovieBuilder()
-                .regular()
-                .build();
-        Rental rental = new RentalBuilder()
-                .movie(movie)
-                .daysRented(1)
-                .build();
-        Customer customer = new CustomerBuilder()
-                .rental(rental)
-                .build();
+        Movie movie = this.buildRegularMovie();
+        Rental rental = this.buildRental(movie, daysRented(1));
+        Customer customer = this.buildCustomerWithRental(rental);
         String statement = customer.statement();
-        String result = new StatementBuilder()
-                .customerName(customer.getName())
-                .movie(movie.getTitle(), 2)
-                .totalAmount(2)
-                .frequentRenterPoints(1)
-                .build();
+        String result = this.buildStatementWithSameTotalAmount(amount(2), frequentRenterPoints(1));
 
         assertEquals(result, statement);
     }
@@ -282,5 +272,45 @@ public class CustomerTest {
                 .totalAmount(0)
                 .frequentRenterPoints(0)
                 .build();
+    }
+
+    private Movie buildRegularMovie() {
+        return new MovieBuilder()
+                .regular()
+                .build();
+    }
+
+    private Rental buildRental(Movie movie, int daysRented) {
+        return new RentalBuilder()
+                .movie(movie)
+                .daysRented(daysRented)
+                .build();
+    }
+
+    private Customer buildCustomerWithRental(Rental rental) {
+        return new CustomerBuilder()
+                .rental(rental)
+                .build();
+    }
+
+    private String buildStatementWithSameTotalAmount(double amount, int frequentRenterPoints) {
+        return new StatementBuilder()
+                .customerName(this.customerName)
+                .movie(this.movieName, amount)
+                .totalAmount(amount)
+                .frequentRenterPoints(frequentRenterPoints)
+                .build();
+    }
+
+    private int daysRented(int daysRented) {
+        return daysRented;
+    }
+
+    private double amount(double amount) {
+        return amount;
+    }
+
+    private int frequentRenterPoints(int frequentRenterPoints) {
+        return frequentRenterPoints;
     }
 }
