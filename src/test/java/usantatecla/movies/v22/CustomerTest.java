@@ -59,23 +59,11 @@ public class CustomerTest {
 
     @Test
     public void newReleaseRental1DayTest() {
-        Movie movie = new MovieBuilder()
-                .newRelease()
-                .build();
-        Rental rental = new RentalBuilder()
-                .movie(movie)
-                .daysRented(1)
-                .build();
-        Customer customer = new CustomerBuilder()
-                .rental(rental)
-                .build();
+        Movie movie = this.buildNewReleaseMovie();
+        Rental rental = this.buildRental(movie, daysRented(1));
+        Customer customer = this.buildCustomerWithRental(rental);
         String statement = customer.statement();
-        String result = new StatementBuilder()
-                .customerName(customer.getName())
-                .movie(movie.getTitle(), 3)
-                .totalAmount(3)
-                .frequentRenterPoints(1)
-                .build();
+        String result = this.buildStatementWithSameTotalAmount(amount(3), frequentRenterPoints(1));
 
         assertEquals(result, statement);
     }
@@ -288,5 +276,11 @@ public class CustomerTest {
 
     private int frequentRenterPoints(int frequentRenterPoints) {
         return frequentRenterPoints;
+    }
+
+    private Movie buildNewReleaseMovie() {
+        return new MovieBuilder()
+                .newRelease()
+                .build();
     }
 }
